@@ -74,6 +74,10 @@ public class VerifyOtpActivity extends AppCompatActivity {
         strUsername = getIntent().getStringExtra("username");
         strPassword = getIntent().getStringExtra("password");
 
+        TvMobileNo.setText(strMobileNo);
+
+
+
         AppCompatBtnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,7 +167,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
         params.put("username",strUsername);
         params.put("password",strPassword);
 
-        client.post("http://192.168.80.197:80/FoodizAPI/userRegisterDetails.php",params,new JsonHttpResponseHandler(){
+        client.post("http://192.168.39.136:80/FoodizAPI/userRegisterDetails.php",params,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);

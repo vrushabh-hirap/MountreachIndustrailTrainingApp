@@ -110,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
         params.put("password",etPassword.getText().toString());
 
 
-        client.post("http://192.168.80.197:80/FoodizAPI/userLogin.php",params,new JsonHttpResponseHandler(){
+        client.post("http://192.168.39.136:80/FoodizAPI/userLogin.php",params,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
@@ -119,6 +119,8 @@ public class LoginActivity extends AppCompatActivity {
                     if (status.equals("1")){
                         progressDialog.dismiss();
                         Toast.makeText(LoginActivity.this,"Login Successful!!",Toast.LENGTH_SHORT).show();
+
+//                        Toast.makeText(LoginActivity.this,"hello",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
                         startActivity(intent);
 

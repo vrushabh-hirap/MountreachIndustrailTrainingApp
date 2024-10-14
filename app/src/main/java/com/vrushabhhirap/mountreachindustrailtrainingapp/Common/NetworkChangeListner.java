@@ -38,10 +38,6 @@ public class NetworkChangeListner extends BroadcastReceiver {
                     onReceive(context,intent);
                 }
             });
-
-
-
-
         }else {
 
         }

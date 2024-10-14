@@ -29,4 +29,23 @@ public class NetworkDetails {
         //here is what happening the networkchangelistener is caller the braodcastreciver and this is calling onRecivier and that is calling NetworkDetails calss and it is calling is connetexto interted funtion and it is calling the connectivitymanager to check the intenent connection
 
     }
+    public static boolean isConnected(Context context){
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(context.CONNECTIVITY_SERVICE);
+
+        if(connectivityManager != null){
+
+            NetworkInfo[] networkInfo = connectivityManager.getAllNetworkInfo();
+
+            if(networkInfo != null){
+
+                for(int i = 0;i<networkInfo.length;i++){
+                    if(networkInfo[i].getState() == NetworkInfo.State.CONNECTED){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }
