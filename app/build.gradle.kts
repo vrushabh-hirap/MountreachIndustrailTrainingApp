@@ -49,5 +49,7 @@ dependencies {
     implementation ("com.google.android.gms:play-services-auth:20.2.0")
 
 
-    implementation ("com.loopj.android:android-async-http:1.4.11")   //Client Server Dependency
+    implementation ("com.loopj.android:android-async-http:1.4.11") //Client Server Dependency
+
+    implementation ("com.google.android.gms:play-services-auth:21.2.0")
 }

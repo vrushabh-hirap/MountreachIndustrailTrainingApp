@@ -66,6 +66,8 @@ public class VerifyOtpActivity extends AppCompatActivity {
         EtOTP5 = findViewById(R.id.et_otp_5);
         EtOTP6 = findViewById(R.id.et_otp_6);
 
+        setUpInputOTP();
+
 
         strVerificationCode = getIntent().getStringExtra("verificationCode");
         strName = getIntent().getStringExtra("name");
@@ -154,8 +156,6 @@ public class VerifyOtpActivity extends AppCompatActivity {
             }
         });
 
-        setUpInputOTP();
-
     }
     private void userRegisterDetails(){
         AsyncHttpClient client = new AsyncHttpClient();
@@ -178,6 +178,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
                         Toast.makeText(VerifyOtpActivity.this,"Registration Successful!!",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(VerifyOtpActivity.this,HomeActivity.class);
                         startActivity(intent);
+                        finish();
 
                     } else {
                         progressDialog.dismiss();

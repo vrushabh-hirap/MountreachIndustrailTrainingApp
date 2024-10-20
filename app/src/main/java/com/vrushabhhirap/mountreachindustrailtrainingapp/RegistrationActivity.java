@@ -14,12 +14,19 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -42,14 +49,18 @@ public class RegistrationActivity extends AppCompatActivity {
     ImageView ivLogo;
     TextView tvRegisterTitle, tvalreadyauserTitle;
     EditText etname,etmobileno,etemailid,etusername,etpassword;
-    AppCompatButton btnRegister;
+    AppCompatButton btnRegister, btnSignInWithGoggle;
 
     ProgressDialog progressDialog;
+    ProgressDialog progressDialog1 ;
 
 
     NetworkChangeListner networkChangeListner = new NetworkChangeListner();
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+    GoogleSignInOptions googleSignInOptions;// to show the user login accounts when we click on the sign in with goole option
+    GoogleSignInClient googleSignInClient; // to store the selected google account (Selected by user )
 
 
 
@@ -83,6 +94,40 @@ public class RegistrationActivity extends AppCompatActivity {
         etusername = findViewById(R.id.etusername);
         etpassword = findViewById(R.id.etPass);
         btnRegister = findViewById(R.id.btnRegister);
+        btnSignInWithGoggle = findViewById(R.id.btnSignWithGoogle);
+
+
+        googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        //this above initialization will show the default sign in gamil options and then it will storre in the goole sign in option
+        //and then this googlesign in options will give the email to the google sign in client
+
+        //googleSignInOptions=>GoogleSignInClient=>GoogleAccount
+
+        googleSignInClient = GoogleSignIn.getClient(RegistrationActivity.this,googleSignInOptions);
+
+
+
+
+        btnSignInWithGoggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressDialog1 = new ProgressDialog(RegistrationActivity.this);
+                progressDialog1.setTitle("Please Wait!");
+                progressDialog1.setMessage("Logging to account");
+                progressDialog1.setCanceledOnTouchOutside(true);
+                progressDialog1.show();
+
+                signInWithGoogle();
+
+            }
+        });
+
+
+
+
+
+
+
 
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -217,7 +262,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                     intent.putExtra("password",etpassword.getText().toString());
                                     startActivity(intent);
                                 }
-                            });
+                    });
 
 
 
@@ -236,4 +281,36 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
+    private void signInWithGoogle() {
+
+        Intent intent = googleSignInClient.getSignInIntent();
+        startActivityForResult(intent,999);//it will just store intent not open it
+
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent userEmail) {
+        super.onActivityResult(requestCode, resultCode, userEmail);
+
+        if (requestCode == 999){
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(userEmail);
+
+            try{
+                task.getResult(ApiException.class);
+                Intent intent = new Intent(RegistrationActivity.this,HomeActivity.class);
+                startActivity(intent);
+                progressDialog1.dismiss();
+                finish();
+            }catch (ApiException e){
+                throw new RuntimeException(e);
+
+            }
+
+
+
+
+        }
+    }
 }

@@ -74,6 +74,20 @@
             android:padding="10dp">
 
         </EditText>
+        <TextView
+            android:id="@+id/tv_forget_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forget Password?"
+            android:textSize="14sp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="right"
+            android:textColor="@color/black"
+            android:fontFamily="@font/abril_fatface"
+            android:layout_below="@+id/ivLoginLogo"
+            android:layout_centerHorizontal="true">
+
+        </TextView>
 
         <CheckBox
             android:layout_width="match_parent"

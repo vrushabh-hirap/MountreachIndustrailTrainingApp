@@ -10,8 +10,8 @@
 
 
     <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/ivRegisterLogo"
         android:src="@drawable/app_logo_2_splash_screen"
         android:layout_centerHorizontal="true"
@@ -151,12 +151,27 @@
 
         </androidx.appcompat.widget.AppCompatButton>
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSignWithGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/common_google_signin_btn_text_dark_focused"
+            android:fontFamily="@font/abril_fatface"
+            android:text="Sign In With Google"
+            android:textColor="@color/black"
+            android:textSize="16sp">
+
+
+        </androidx.appcompat.widget.AppCompatButton>
+
         <TextView
             android:id="@+id/tvAlreadyAUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Already a User"
             android:textSize="16sp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/abril_fatface"
             android:layout_below="@+id/ivLoginLogo"
             android:layout_centerHorizontal="true"

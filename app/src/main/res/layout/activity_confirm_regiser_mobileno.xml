@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfirmRegiserMobilenoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        >
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:src="@drawable/app_logo_2_splash_screen">
+
+        </ImageView>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter redistered mobile no"
+            android:id="@+id/etConfirmRegisterMobileno"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_margin="20dp"
+            android:background="@drawable/btn_shape_background"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:inputType="number"
+            android:maxLength="10">
+
+        </EditText>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_verify_mobile_no_for_set_new_password"
+            android:text="Verify"
+            android:layout_gravity="center"
+            android:background="@color/blue"
+            android:shadowRadius="30"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            >
+
+        </androidx.appcompat.widget.AppCompatButton>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
 
+    TextView tvForgetPassword;
+
 
     NetworkChangeListner networkChangeListner = new NetworkChangeListner();
 
@@ -72,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPass);
         btnLogin = findViewById(R.id.btnLogin);
         cbShowPass = findViewById(R.id.cbLoginShowAndHidePassword);
+        tvForgetPassword = findViewById(R.id.tv_forget_password);
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +97,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(LoginActivity.this,RegistrationActivity.class);
                 startActivity(i);
+            }
+        });
+
+        tvForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,ConfirmRegiserMobilenoActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -123,6 +134,7 @@ public class LoginActivity extends AppCompatActivity {
 //                        Toast.makeText(LoginActivity.this,"hello",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
                         startActivity(intent);
+                        finish();
 
                     } else {
                         progressDialog.dismiss();
