@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 
 import cz.msebera.android.httpclient.Header;
 
-public class ForgetPasswordVerifyOTPActivity extends AppCompatActivity {
+public class ForgetPasswordVerifyOTPActivity extends BaseClass {
 
     TextView TvMobileNo,TvResendOTP;
     AppCompatButton AppCompatBtnVerify;

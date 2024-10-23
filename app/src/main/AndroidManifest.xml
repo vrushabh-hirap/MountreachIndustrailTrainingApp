@@ -36,7 +36,8 @@
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/show_action_bar"/>
         <activity
             android:name=".RegistrationActivity"
             android:exported="false" />

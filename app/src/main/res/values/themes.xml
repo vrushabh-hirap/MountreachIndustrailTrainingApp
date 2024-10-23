@@ -5,5 +5,9 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+    <style name="show_action_bar" parent="Theme.Material3.DayNight">
+
+    </style>
+
     <style name="Theme.MountreachIndustrailTrainingApp" parent="Base.Theme.MountreachIndustrailTrainingApp" />
 </resources>

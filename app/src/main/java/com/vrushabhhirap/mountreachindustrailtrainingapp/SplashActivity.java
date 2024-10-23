@@ -20,7 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.LogRecord;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseClass {
     ImageView ivLogo;
     TextView tvTitle;
     Animation animTranslateForLogo;
@@ -48,6 +48,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Intent i = new Intent(SplashActivity.this,LoginActivity.class);
                 startActivity(i);
+                finish();
             }
         },3000);
 

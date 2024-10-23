@@ -23,6 +23,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.vrushabhhirap.mountreachindustrailtrainingapp.Common.NetworkChangeListner;
+import com.vrushabhhirap.mountreachindustrailtrainingapp.Common.Urls;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,39 +43,13 @@ public class LoginActivity extends AppCompatActivity {
     TextView tvForgetPassword;
 
 
-    NetworkChangeListner networkChangeListner = new NetworkChangeListner();
-
-
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(networkChangeListner,intentFilter);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        unregisterReceiver(networkChangeListner);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
 
-        ivLogo = findViewById(R.id.ivLoginLogo);
-        tvTitle = findViewById(R.id.tvLoginTitle);
-        tvNewUser = findViewById(R.id.tvNewUserTitle);
-        etUserName = findViewById(R.id.etName);
-        etPassword = findViewById(R.id.etPass);
-        btnLogin = findViewById(R.id.btnLogin);
-        cbShowPass = findViewById(R.id.cbLoginShowAndHidePassword);
-        tvForgetPassword = findViewById(R.id.tv_forget_password);
+        getID();
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +87,17 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void getID() {
+        ivLogo = findViewById(R.id.ivLoginLogo);
+        tvTitle = findViewById(R.id.tvLoginTitle);
+        tvNewUser = findViewById(R.id.tvNewUserTitle);
+        etUserName = findViewById(R.id.etName);
+        etPassword = findViewById(R.id.etPass);
+        btnLogin = findViewById(R.id.btnLogin);
+        cbShowPass = findViewById(R.id.cbLoginShowAndHidePassword);
+        tvForgetPassword = findViewById(R.id.tv_forget_password);
+    }
+
     private void userLogin() {
 
         AsyncHttpClient client = new AsyncHttpClient();
@@ -121,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
         params.put("password",etPassword.getText().toString());
 
 
-        client.post("http://192.168.39.136:80/FoodizAPI/userLogin.php",params,new JsonHttpResponseHandler(){
+        client.post(Urls.loginUserURL , params,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);

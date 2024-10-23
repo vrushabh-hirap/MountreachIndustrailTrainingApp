@@ -17,13 +17,14 @@ import androidx.core.view.WindowInsetsCompat;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.vrushabhhirap.mountreachindustrailtrainingapp.Common.Urls;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-public class SetUpNewPasswordActivity extends AppCompatActivity {
+public class SetUpNewPasswordActivity extends BaseClass {
 
     String strMobileno;
 
@@ -77,7 +78,7 @@ public class SetUpNewPasswordActivity extends AppCompatActivity {
         params.put("mobileno",strMobileno);
         params.put("password",etConfirmPass.getText().toString());
 
-        client.post("http://192.168.39.136:80/FoodizAPI/forgetPassword.php",params,
+        client.post(Urls.forgetPasswordUserURL,params,
                 new JsonHttpResponseHandler(){
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

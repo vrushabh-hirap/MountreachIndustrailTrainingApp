@@ -44,7 +44,7 @@ import java.util.concurrent.TimeUnit;
 
 import cz.msebera.android.httpclient.Header;
 
-public class RegistrationActivity extends AppCompatActivity {
+public class RegistrationActivity extends BaseClass {
 
     ImageView ivLogo;
     TextView tvRegisterTitle, tvalreadyauserTitle;
@@ -55,29 +55,10 @@ public class RegistrationActivity extends AppCompatActivity {
     ProgressDialog progressDialog1 ;
 
 
-    NetworkChangeListner networkChangeListner = new NetworkChangeListner();
-
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     GoogleSignInOptions googleSignInOptions;// to show the user login accounts when we click on the sign in with goole option
     GoogleSignInClient googleSignInClient; // to store the selected google account (Selected by user )
-
-
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(networkChangeListner,intentFilter);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        unregisterReceiver(networkChangeListner);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,16 +66,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_registration);
 
-        ivLogo = findViewById(R.id.ivRegisterLogo);
-        tvRegisterTitle = findViewById(R.id.tvRegisterTitle);
-        tvalreadyauserTitle = findViewById(R.id.tvAlreadyAUser);
-        etname = findViewById(R.id.etName);
-        etmobileno = findViewById(R.id.etmobileno);
-        etemailid = findViewById(R.id.etemailid);
-        etusername = findViewById(R.id.etusername);
-        etpassword = findViewById(R.id.etPass);
-        btnRegister = findViewById(R.id.btnRegister);
-        btnSignInWithGoggle = findViewById(R.id.btnSignWithGoogle);
+        getID();
 
 
         googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
@@ -121,13 +93,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
-
-
 
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -279,6 +244,19 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getID() {
+        ivLogo = findViewById(R.id.ivRegisterLogo);
+        tvRegisterTitle = findViewById(R.id.tvRegisterTitle);
+        tvalreadyauserTitle = findViewById(R.id.tvAlreadyAUser);
+        etname = findViewById(R.id.etName);
+        etmobileno = findViewById(R.id.etmobileno);
+        etemailid = findViewById(R.id.etemailid);
+        etusername = findViewById(R.id.etusername);
+        etpassword = findViewById(R.id.etPass);
+        btnRegister = findViewById(R.id.btnRegister);
+        btnSignInWithGoggle = findViewById(R.id.btnSignWithGoogle);
     }
 
     private void signInWithGoogle() {

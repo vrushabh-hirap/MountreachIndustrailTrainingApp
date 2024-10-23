@@ -21,7 +21,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class ConfirmRegiserMobilenoActivity extends AppCompatActivity {
+public class ConfirmRegiserMobilenoActivity extends BaseClass {
 
     EditText confirmMobileno;
     AppCompatButton acbtnVerify;

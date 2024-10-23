@@ -28,6 +28,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.vrushabhhirap.mountreachindustrailtrainingapp.Common.Urls;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +37,7 @@ import java.util.concurrent.TimeUnit;
 
 import cz.msebera.android.httpclient.Header;
 
-public class VerifyOtpActivity extends AppCompatActivity {
+public class VerifyOtpActivity extends BaseClass {
 
     TextView TvMobileNo,TvResendOTP;
     AppCompatButton AppCompatBtnVerify;
@@ -167,7 +168,7 @@ public class VerifyOtpActivity extends AppCompatActivity {
         params.put("username",strUsername);
         params.put("password",strPassword);
 
-        client.post("http://192.168.39.136:80/FoodizAPI/userRegisterDetails.php",params,new JsonHttpResponseHandler(){
+        client.post(Urls.registerUserURL,params,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
