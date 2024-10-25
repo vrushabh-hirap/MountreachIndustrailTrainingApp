@@ -3,9 +3,11 @@ package com.vrushabhhirap.mountreachindustrailtrainingapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -43,6 +45,7 @@ import org.json.JSONObject;
 import java.util.concurrent.TimeUnit;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.client.RedirectStrategy;
 
 public class RegistrationActivity extends BaseClass {
 
@@ -53,6 +56,8 @@ public class RegistrationActivity extends BaseClass {
 
     ProgressDialog progressDialog;
     ProgressDialog progressDialog1 ;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
 
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -78,6 +83,8 @@ public class RegistrationActivity extends BaseClass {
         googleSignInClient = GoogleSignIn.getClient(RegistrationActivity.this,googleSignInOptions);
 
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(RegistrationActivity.this);
+        editor = sharedPreferences.edit();
 
 
         btnSignInWithGoggle.setOnClickListener(new View.OnClickListener() {
@@ -279,6 +286,7 @@ public class RegistrationActivity extends BaseClass {
                 task.getResult(ApiException.class);
                 Intent intent = new Intent(RegistrationActivity.this,HomeActivity.class);
                 startActivity(intent);
+                editor.putBoolean("isGoogleSignedIn", true).commit();
                 progressDialog1.dismiss();
                 finish();
             }catch (ApiException e){

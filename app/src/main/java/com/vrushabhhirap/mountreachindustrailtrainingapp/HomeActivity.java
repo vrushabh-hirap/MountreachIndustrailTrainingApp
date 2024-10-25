@@ -2,8 +2,12 @@ package com.vrushabhhirap.mountreachindustrailtrainingapp;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -17,6 +21,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.widget.TintableCheckedTextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -51,12 +56,18 @@ public class HomeActivity extends BaseClass implements BottomNavigationView.OnNa
 
     FrameLayout frameLayout;
     BottomNavigationView bottomNavigationView;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(HomeActivity.this);
+        editor = preferences.edit();
 
         bottomNavigationView = findViewById(R.id.bototm_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
@@ -73,6 +84,7 @@ public class HomeActivity extends BaseClass implements BottomNavigationView.OnNa
 //
         GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(this);
 //
+
         if (googleSignInAccount != null){
             strName = googleSignInAccount.getDisplayName();
             strEmailId = googleSignInAccount.getEmail();
@@ -80,23 +92,12 @@ public class HomeActivity extends BaseClass implements BottomNavigationView.OnNa
             strUsername = googleSignInAccount.getGivenName();
             strPassword = "";
 
+            editor.putString("username",strUsername);
+            editor.putString("password","");
+
             userRegisterDetails();
 
         }
-//
-//        btnSignOut.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        Intent intent = new Intent(HomeActivity.this,RegistrationActivity.class);
-//                        startActivity(intent);
-//                        finish();
-//                    }
-//                });
-//            }
-//        });
 
 
 
@@ -158,5 +159,32 @@ public class HomeActivity extends BaseClass implements BottomNavigationView.OnNa
         });
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.home_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId() == R.id.home_menu_my_offers){
+
+        }else if(item.getItemId() == R.id.home_menu_my_cart){
+
+        }else if(item.getItemId() == R.id.home_menu_my_profile){
+
+//            startActivity(new Intent(HomeActivity.this,MyProfileActivity.class));
+            Toast.makeText(this, "calling profile", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(HomeActivity.this,MyProfileActivity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Profile called", Toast.LENGTH_SHORT).show();
+
+        }
+        return true;
     }
 }

@@ -2,7 +2,9 @@ package com.vrushabhhirap.mountreachindustrailtrainingapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -43,7 +45,10 @@ public class VerifyOtpActivity extends BaseClass {
     AppCompatButton AppCompatBtnVerify;
     EditText EtOTP1,EtOTP2,EtOTP3,EtOTP4,EtOTP5,EtOTP6;
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     ProgressDialog progressDialog;
+
 
     private String strVerificationCode, strName, strMobileNo, strEmailId, strUsername, strPassword;
 
@@ -56,6 +61,8 @@ public class VerifyOtpActivity extends BaseClass {
 
         setContentView(R.layout.activity_verify_otp);
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(VerifyOtpActivity.this);
+        editor = sharedPreferences.edit();
         TvMobileNo = findViewById(R.id.verify_otp_mobileno_TV);
         TvResendOTP = findViewById(R.id.tv_resend_otp);
         AppCompatBtnVerify = findViewById(R.id.material_btn_verify);
@@ -178,6 +185,9 @@ public class VerifyOtpActivity extends BaseClass {
                         progressDialog.dismiss();
                         Toast.makeText(VerifyOtpActivity.this,"Registration Successful!!",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(VerifyOtpActivity.this,HomeActivity.class);
+                        editor.putBoolean("isGoogleSignedIn",false).commit();
+                        editor.putString("username",strUsername).commit();
+                        editor.putString("password",strPassword).commit();
                         startActivity(intent);
                         finish();
 

@@ -3,8 +3,10 @@ package com.vrushabhhirap.mountreachindustrailtrainingapp;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -42,6 +44,9 @@ public class LoginActivity extends AppCompatActivity {
 
     TextView tvForgetPassword;
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         getID();
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        editor = sharedPreferences.edit();
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -119,6 +127,9 @@ public class LoginActivity extends AppCompatActivity {
 
 //                        Toast.makeText(LoginActivity.this,"hello",Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+                        editor.putString("username",etUserName.getText().toString()).commit();
+                        editor.putString("password",etPassword.getText().toString()).commit();
+                        editor.putBoolean("isGoogleSignedIn",false).commit();
                         startActivity(intent);
                         finish();
 

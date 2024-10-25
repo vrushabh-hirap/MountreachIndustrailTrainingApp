@@ -1,10 +1,12 @@
 package com.vrushabhhirap.mountreachindustrailtrainingapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -28,6 +30,9 @@ public class SplashActivity extends BaseClass {
 
     Handler handler;
 
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +41,8 @@ public class SplashActivity extends BaseClass {
         ivLogo = findViewById(R.id.ivSplashLogo);
         tvTitle = findViewById(R.id.tvSplashTitle);
 
+        preferences = PreferenceManager.getDefaultSharedPreferences(SplashActivity.this);
+        editor = preferences.edit();
         animTranslateForLogo = AnimationUtils.loadAnimation(SplashActivity.this,R.anim.top_to_bottom_translate);
         ivLogo.startAnimation(animTranslateForLogo);
 
@@ -46,9 +53,19 @@ public class SplashActivity extends BaseClass {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashActivity.this,LoginActivity.class);
-                startActivity(i);
-                finish();
+
+                String username = preferences.getString("username",null);
+                String password = preferences.getString("password",null);
+                if ((username != null)){
+                    startActivity(new Intent(SplashActivity.this,HomeActivity.class));
+                    editor.putBoolean("isGoogleSignedIn",false).commit();
+                    finish();
+                }else{
+                    Intent i = new Intent(SplashActivity.this,LoginActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+
             }
         },3000);
 
